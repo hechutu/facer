@@ -1,3 +1,11 @@
+```bash
+仅脸
+python face_matting.py -i input -o output -t 1
+
+脸+头发
+python face_matting.py -i input -o output -t 2
+```
+
 # FACER
 
 Face related toolkit. This repo is still under construction to include more models.
