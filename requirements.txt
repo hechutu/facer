@@ -8,3 +8,4 @@ matplotlib
 validators
 requests
 opencv-python
+timm

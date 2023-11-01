@@ -24,6 +24,7 @@ def show_hwc(image: torch.Tensor):
     if image.size(2) == 1:
         image = image.repeat(1, 1, 3)
     pimage = Image.fromarray(image.cpu().numpy())
+    pimage.save('out1.jpg')
     plt.imshow(pimage)
     plt.show()
 

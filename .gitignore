@@ -132,3 +132,5 @@ samples/output
 
 .token.txt
 .downloaded/
+input/
+output/
