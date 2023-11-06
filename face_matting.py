@@ -25,6 +25,15 @@ def single_process(type, filePath, outputPath):
 
     seg_logits = faces['seg']['logits']
 
+    '''
+    plot algorithm img
+    '''
+    # seg_probs = seg_logits.softmax(dim=1)  # nfaces x nclasses x h x w
+    # n_classes = seg_probs.size(1)
+    # vis_seg_probs = seg_probs.argmax(dim=1).float() / n_classes * 255
+    # vis_img = vis_seg_probs.sum(0, keepdim=True)
+    # facer.show_bhw(vis_img)
+    # facer.show_bchw(facer.draw_bchw(image, faces))
 
     seg_probs = seg_logits.softmax(dim=1)  # nfaces x nclasses x h x w
 
@@ -33,10 +42,8 @@ def single_process(type, filePath, outputPath):
     if 1 == type:
         max_value = findHairValue(vis_seg_probs)
         vis_seg_probs[vis_seg_probs == max_value] = 0
-    vis_seg_probs[vis_seg_probs != 0] = 255
-    plt.imshow(vis_seg_probs[0], cmap='gray')
-    plt.savefig(outputPath)
-    plt.show()
+    vis_seg_probs[vis_seg_probs.cpu() != 0] = 255
+    plt.imsave(outputPath, vis_seg_probs[0], cmap='gray')
 
 
 def findHairValue(vis_seg_probs):
@@ -90,5 +97,5 @@ if __name__ == "__main__":
     print(f"outputDir path: {args.outputDir}")
     print(f"type: {args.type}")
 
-    gen_images(args)
-    # single_process(1, 'input/2.jpeg', 'output/2.jpeg')
+    # gen_images(args)
+    single_process(1, 'input/10.300716.jpg', 'output/10.300716.jpg')
